@@ -22,16 +22,20 @@ stream.on('data', (event) => {
     createdAt: event.created_at
   }
 
+  console.log(message);
+
   tortoise
     .queue(queue)
     .publish(message)
     .then(() => {
+      console.log('-----------------');
       logger.debug('New tweet received, published message to queue', {
         queue,
         message
       })
     })
     .catch((err) => {
+      console.log('errrrrrrrrrrrr');
       logger.error('New tweet received, error happened during message publish to queue', {
         queue,
         err
